@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{% load static  %}
+{%block contenido%}
+<div>
+
+    <form method='Post' enctype='multipart/form-data'>
+        {%csrf_token%}
+        <h2>Agregar categoria</h2>
+        <div>
+            {{form.as_p}}
+            {{form.media}}
+            <input type="submit" value="Cargar articulo">
+        </div>
+    </form>
+</div>
+{%endblock%}
