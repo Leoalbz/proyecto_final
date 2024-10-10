@@ -1,0 +1,3 @@
+.env
+/media/lenguages/*
+!/media/lenguages/empty

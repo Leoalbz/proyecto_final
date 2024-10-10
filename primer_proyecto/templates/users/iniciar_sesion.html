@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>Iniciar Sesión</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'navegacion.html' %}
+{% endblock %}
+
+{% block contenido %}
+
+<form  method="post">{% csrf_token %}
+    <section style="margin-top: 5%;" data-bs-version="5.1" class="form4 cid-tf6M1H8RDD mbr-fullscreen" id="form4-12">
+        <div class="container">
+            <div class="row content-wrapper justify-content-center align-items-center">
+                <!-- Formulario -->
+                <div class="col-lg-5 col-md-8 mbr-form" data-form-type="formoid">
+                    <div class="dragArea row">
+                        <div class="col-lg-12">
+                            <h1 class="mbr-section-title mb-4 display-4 text-center"><strong>Iniciar sesión</strong></h1>
+                        </div>
+                        <div class="col-lg-12 mb-4 text-center">
+                            <p class="mbr-text mbr-fonts-style display-7">Complete los campos para iniciar sesion</p>
+                        </div>
+
+                        <!-- Campos del formulario -->
+                                {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Iniciar Sesion</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Imagen al lado del formulario -->
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="image-wrapper">
+                        <img class="img-fluid" src="{% static 'img/informatorio.jpg' %}" alt="Imagen de registro de usuario">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+{% endblock %}
