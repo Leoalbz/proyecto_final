@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title %}
+
+<title>Articulos</title>
+
+{% endblock%}
+
+{% block contenido %}
+
+{% if articulo %}
+<h1>Articulos</h1>
+{% for articulo in articulos %}
+<div class="card" style="width: 18rem;">
+    <img src="articulo.imagen.url" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ articulo.nombre_articulo}}</h5>
+        <p class="card-text">{{articulo.descripcion_articulo}}</p>
+        <a href="#" class="btn btn-primary">Ver articulo</a>
+    </div>
+</div>
+
+{% endfor%}
+{% endif%}
+{% endblock%}

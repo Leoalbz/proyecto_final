@@ -5,18 +5,18 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
-def mostrar_registros(request):
- registros = php.objects.all()
+def mostrar_articulos(request):
+ articulo = php.objects.all()
  context = {
-  'registro' : registros
+  'articulo' : articulo
  }
  template_name = 'php/listar_articulos.html'
  return render(request, template_name=template_name, context=context)
 
-def mostrar_registro_by_id(request, id):
-  registro = php.objects.get(id = id)
+def mostrar_articulos_by_id(request, id):
+  articulo = php.objects.get(id = id)
   context = {
-  'registro' : registro
+  'articulo' : articulo
  }
   template_name = 'php/detalle_articulo.html'
   return render(request, template_name=template_name, context=context)
@@ -30,8 +30,8 @@ class Crear_articulo(CreateView):
 
 class Actualizar_articulo(UpdateView):
   model = php
-  fields = ['nombre' , 'descripcion', 'articulo', 'imagen']
-  template_name = 'php/actualizar_articulo.html'
+  fields = ['nombre_articulo' , 'descripcion_articulo', 'articulo', 'imagen']
+  template_name = 'php/agregar_articulo.html'
   success_url = reverse_lazy('inicio')
 
 class Borrar_articulo(DeleteView):
