@@ -38,4 +38,3 @@ class Borrar_articulo(DeleteView):
   model = php
   template_name = 'php/eliminar_articulo.html'
   success_url = reverse_lazy('inicio')
-

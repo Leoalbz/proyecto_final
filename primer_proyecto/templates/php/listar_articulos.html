@@ -10,9 +10,9 @@
 
 {% block contenido %}
 
-{% if articulo %}
+{% if articulos %}
 <h1>Articulos</h1>
-{% for p in articulo %}
+{% for p in articulos %}
 <div class="card" style="width: 18rem;">
     <img src="{{ p.imagen.url }}" class="card-img-top" alt="...">
     <div class="card-body">
@@ -23,8 +23,11 @@
 </div>
 
 {% endfor %}
+
 {% else %}
+
 <h1>No hay ningun articulo para mostrar aún</h1>
+
 {% endif %}
 
 {% endblock %}
