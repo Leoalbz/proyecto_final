@@ -1,4 +1,4 @@
-{% load static % }
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,18 +9,18 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {% block title %}
 
-    {%endblock%}
+    {% endblock %}
 </head>
 
 <body>
     <div>
-        {%block navegacion %}
-        {%include 'nav_bar.html' %}
-        {%endblock%}
+        {% block navegacion %}
+        {% include 'nav_bar.html' %}
+        {% endblock %}
     </div>
     <div>
-        {%block contenido %}
-        {%endblock%}
+        {% block contenido %}
+        {% endblock %}
     </div>
 </body>
 <footer>

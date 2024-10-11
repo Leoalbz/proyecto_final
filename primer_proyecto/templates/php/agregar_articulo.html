@@ -1,10 +1,10 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static  %}
-{%block contenido%}
+{% block contenido %}
 <div>
 
     <form method='Post' enctype='multipart/form-data'>
-        {%csrf_token%}
+        {% csrf_token %}
         <h2>Agregar categoria</h2>
         <div>
             {{form.as_p}}
@@ -13,4 +13,4 @@
         </div>
     </form>
 </div>
-{%endblock%}
+{% endblock %}

@@ -21,8 +21,8 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 LOGIN_URL = reverse_lazy('apps.blog_auth:iniciar_sesion')
-LOGIN_REDIRECT_URL = reverse_lazy('index')
-LOGOUT_REDIRECT_URL = reverse_lazy('index')
+LOGIN_REDIRECT_URL = reverse_lazy('inicio')
+LOGOUT_REDIRECT_URL = reverse_lazy('inicio')
 
 
 # Quick-start development settings - unsuitable for production
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #apps creadas
-    'apps.post'
+    'apps.post',
+    'apps.blog_auth'
 ]
 
 MIDDLEWARE = [

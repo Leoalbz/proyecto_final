@@ -25,7 +25,8 @@ from .views import HomeView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='inicio'),
-    path('php/', include('apps.post.urls'))
+    path("php/", include('apps.post.urls')),
+    path("users/", include('apps.blog_auth.urls'))
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
