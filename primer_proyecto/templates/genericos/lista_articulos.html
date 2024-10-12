@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Inicio</title>
+{% endblock %}
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+{% block contenido %}
+<h2>Lista de Artículos</h2>
+<ul>
+    {% for articulo in articulos %}
+        <li>
+            <a href="{% url 'post:leer_articulo' articulo.pk %}">{{ articulo.titulo }}</a> - 
+            {{ articulo.lenguaje }}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'post:crear_articulo' %}">Crear nuevo artículo</a>
+{% endblock %}

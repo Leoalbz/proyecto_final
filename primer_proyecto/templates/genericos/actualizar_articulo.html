@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Editar Articulo</title>
+{% endblock %}
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+{% block contenido %}
+<h1>Editar artículo</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Actualizar</button>
+</form>
+{% endblock %}

@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ articulo.titulo }}</title>
-</head>
-<body>
-    <h1>{{ articulo.titulo }}</h1>
-    <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
-    <p>Lenguaje: {{ articulo.lenguaje }}</p>
-    <p>{{ articulo.contenido }}</p>
-
-    <a href="{% url 'post:lista_articulos' %}">Volver a la lista de artículos</a>
-</body>
-</html>
+<h1>{{ articulo.titulo }}</h1>
+<p>{{ articulo.contenido }}</p>
+<p><strong>Lenguaje:</strong> {{ articulo.lenguaje }}</p>
+{% if articulo.imagen %}
+    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+{% endif %}
+<p>Publicado el {{ articulo.fecha_publicacion }}</p>

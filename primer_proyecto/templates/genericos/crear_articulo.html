@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Crear Articulo</title>
+{% endblock %}
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+{% block contenido %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="titulo">Título:</label>
+      <input type="text" name="titulo" id="titulo" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="contenido">Contenido:</label>
+      <textarea name="contenido" id="contenido" class="form-control"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="imagen">Imagen:</label>
+      <input type="file" name="imagen" id="imagen" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <label for="lenguaje">Lenguaje:</label>
+      <input type="text" name="lenguaje" id="lenguaje" class="form-control">
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+  {% endblock %}
+  
