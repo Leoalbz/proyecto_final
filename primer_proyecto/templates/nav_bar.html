@@ -32,6 +32,51 @@
             </ul>
           </div>
         </div>
+        <ul class="nav nav-underline">
+            {% if user.is_authenticated %}
+            <div class="list-group-item d-flex gap-3 py-3" aria-current="true">
+                <img src="{{ user.imagen.url }}" alt="perfil" width="40" height="40"
+                    class="rounded-circle flex-shrink-0">
+                <ul class="navbar-nav">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item"
+                                    href="{% url 'apps.blog_auth:editar_perfil' user.pk %}">Modificar
+                                    Perfil</a></li>
+                            <li>
+                                <form method="post" action="{% url 'apps.blog_auth:cerrar_sesion' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'apps.blog_auth:registracion' %}">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'apps.blog_auth:iniciar_sesion' %}">Iniciar Sesión</a>
+                </li>
+                {% endif %}
+        </ul>
+        {% if user.is_staff %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Colaborador
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="">Agregar categoría</a></li>
+                <li><a class="dropdown-item" href="{% url 'apps.post:crear_articulo' %}">Agregar Articulo PHP</a></li>
+              </ul>
+        </li>
+        {% endif %}
       </nav>
 </body>
 </html>
