@@ -1,40 +1,60 @@
-from django.shortcuts import render
+from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
-from .models import php
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Articulo
+from django.shortcuts import render
+# Listar artículos
+class ListaArticulos(ListView):
+    model = Articulo
+    template_name = 'post/lista_articulos.html'
+    context_object_name = 'articulos'
 
-# Create your views here.
+    def get_queryset(self) -> QuerySet[any]:
+        return super().get_queryset()
 
-def mostrar_articulos(request):
- articulo = php.objects.all()
- context = {
-  'articulo' : articulo
- }
- template_name = 'php/listar_articulos.html'
- return render(request, template_name=template_name, context=context)
+# Detalles de un artículo
+class LeerArticulo(DetailView):
+    model = Articulo
+    template_name = 'post/leer_articulo.html'
+    context_object_name = 'articulo'
 
-def mostrar_articulos_by_id(request, id):
-  articulo = php.objects.get(id = id)
-  context = {
-  'articulo' : articulo
- }
-  template_name = 'php/detalle_articulo.html'
-  return render(request, template_name=template_name, context=context)
+# Crear un nuevo artículo
+class CrearArticulo(CreateView):
+    model = Articulo
+    template_name = 'post/crear_articulo.html'
+    fields = ['titulo', 'contenido', 'lenguaje']
+    success_url = reverse_lazy('post:lista_articulos')
 
+# Actualizar un artículo existente
+class ActualizarArticulo(UpdateView):
+    model = Articulo
+    template_name = 'post/actualizar_articulo.html'
+    fields = ['titulo', 'contenido']
+    success_url = reverse_lazy('post:lista_articulos')
 
-class Crear_articulo(CreateView):
-   model = php
-   fields = ['nombre_articulo' , 'descripcion_articulo', 'articulo', 'imagen']
-   template_name = 'php/agregar_articulo.html'
-   success_url = reverse_lazy('inicio')
+# Eliminar un artículo
+class EliminarArticulo(DeleteView):
+    model = Articulo
+    template_name = 'post/eliminar_articulo.html'
+    success_url = reverse_lazy('post:lista_articulos')
 
-class Actualizar_articulo(UpdateView):
-  model = php
-  fields = ['nombre_articulo' , 'descripcion_articulo', 'articulo', 'imagen']
-  template_name = 'php/agregar_articulo.html'
-  success_url = reverse_lazy('inicio')
+def categoria_view(request):
+    categoria = request.GET.get('categoria')
+    articulos = Articulo.objects.filter(categoria=categoria) if categoria else Articulo.objects.all()
+    return render(request, 'post/categoria.html', {'articulos': articulos})
 
-class Borrar_articulo(DeleteView):
-  model = php
-  template_name = 'php/eliminar_articulo.html'
-  success_url = reverse_lazy('inicio')
+def php_view(request):
+    # Lógica para PHP
+    return render(request, 'post/php.html')
+
+def python_view(request):
+    # Lógica para Python
+    return render(request, 'post/python.html')
+
+def java_view(request):
+    # Lógica para Java
+    return render(request, 'post/java.html')
+
+def javascript_view(request):
+    # Lógica para JavaScript
+    return render(request, 'post/javascript.html')

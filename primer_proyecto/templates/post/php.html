@@ -1,0 +1,20 @@
+<!-- apps/post/templates/post/php.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>PHP</title>
+{% endblock %}
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+<div class="img_banner"  width="100%" height="1200px">
+    <img class="card-img" src="{% static 'img/php.png' %}" alt="Banner" width="100%" height="auto">
+</div>
+<section>
+    <h1>Contenido de PHP</h1>
+    <p>Aquí puedes agregar información relacionada con PHP.</p>
+</section>
+{% endblock %}
+

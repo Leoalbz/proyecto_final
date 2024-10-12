@@ -1,17 +1,15 @@
 from django.db import models
 
-# Create your models here.
+class Articulo(models.Model):
+    titulo = models.CharField(max_length=100)
+    contenido = models.TextField()
+    fecha_publicacion = models.DateTimeField(auto_now_add=True)
+    imagen = models.ImageField(upload_to='articulos/', blank=True, null=True)
 
-
-class php(models.Model):
-    nombre_articulo = models.CharField(max_length=30, null = False, unique=True)
-    descripcion_articulo = models.TextField() 
-    articulo = models.TextField()
-    imagen = models.ImageField(null=False, blank= True, upload_to='php')
-    fecha_agregado = models.DateTimeField(auto_now_add = True)
-    
     def __str__(self):
-        return self.nombre_articulo
+        return self.titulo
     
     class Meta:
-        ordering = ('fecha_agregado',)
+        ordering = ('fecha_publicacion',)
+
+ 
