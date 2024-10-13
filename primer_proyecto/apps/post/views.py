@@ -1,4 +1,3 @@
-from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Articulo
@@ -9,9 +8,6 @@ class ListaArticulos(ListView):
     model = Articulo
     template_name = 'genericos/lista_articulos.html'
     context_object_name = 'articulos'
-
-    def get_queryset(self) -> QuerySet[any]:
-        return super().get_queryset()
 
 # Detalles de un artículo
 class LeerArticulo(DetailView):

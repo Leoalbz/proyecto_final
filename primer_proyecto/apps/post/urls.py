@@ -1,4 +1,3 @@
-
 from django.urls import path
 from .views import ListaArticulos, LeerArticulo, CrearArticulo, ActualizarArticulo, EliminarArticulo, index_view, categoria_view, php_view, python_view, java_view, javascript_view
 
