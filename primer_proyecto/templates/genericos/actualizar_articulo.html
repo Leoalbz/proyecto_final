@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-<title>Editar Articulo</title>
+<title>Editar Artículo</title>
 {% endblock %}
 {% block navegacion %}
 {% include 'nav_bar.html' %}
 {% endblock %}
 {% block contenido %}
-<h1>Editar artículo</h1>
-<form method="post">
+<h2>Editar Artículo: {{ articulo.titulo }}</h2>
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Actualizar</button>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
 </form>
 {% endblock %}

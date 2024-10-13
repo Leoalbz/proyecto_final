@@ -1,7 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Inicio</title>
+{% endblock %}
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+{% block contenido %}
 <h1>{{ articulo.titulo }}</h1>
+{% if articulo.imagen %}
+<img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+{% endif %}
 <p>{{ articulo.contenido }}</p>
 <p><strong>Lenguaje:</strong> {{ articulo.lenguaje }}</p>
-{% if articulo.imagen %}
-    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
-{% endif %}
+
 <p>Publicado el {{ articulo.fecha_publicacion }}</p>
+{% endblock %}

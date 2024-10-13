@@ -8,10 +8,23 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="card text-bg-dark" width="100%" height="1200px">
+<div class="card text-bg-dark" width="100%" height="auto">
     <img class="card-img" src="{% static 'img/banner.png' %}" alt="Banner" width="100%" height="auto">
 </div>
-<section>
-  
-</section>
+<h1>Artículos</h1>
+<ul>
+    {% for articulo in articulos %}
+        <li>
+            <h1>{{ articulo.titulo }}</h1>
+            <p>{{ articulo.contenido }}</p>
+            <p><strong>Lenguaje:</strong> {{ articulo.lenguaje }}</p>
+            {% if articulo.imagen %}
+                <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+            {% endif %}
+            <p>Publicado el {{ articulo.fecha_publicacion }}</p>
+        </li>
+    {% empty %}
+        <li>No hay artículos disponibles.</li>
+    {% endfor %}
+</ul>
 {% endblock %}

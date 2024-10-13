@@ -30,7 +30,7 @@ class CrearArticulo(CreateView):
 class ActualizarArticulo(UpdateView):
     model = Articulo
     template_name = 'genericos/actualizar_articulo.html'
-    fields = ['titulo', 'contenido']
+    fields = ['titulo', 'contenido', 'imagen', 'lenguaje']
     success_url = reverse_lazy('post:lista_articulos')
 
 # Eliminar un artículo
@@ -41,23 +41,28 @@ class EliminarArticulo(DeleteView):
 
 # Filtrar categorias
 def categoria_view(request):
-    categoria = request.GET.get('categoria')
-    articulos = Articulo.objects.filter(categoria=categoria) if categoria else Articulo.objects.all()
-    return render(request, 'post/categoria.html', {'articulos': articulos})
+    lenguaje = request.GET.get('lenguaje')
+    articulos = Articulo.objects.filter(lenguaje=lenguaje) if lenguaje else Articulo.objects.all()
+    return render(request, 'post/nav_bar.html', {'articulos': articulos})
+
+# Vista index
+def index_view(request):
+    articulos = Articulo.objects.all()
+    return render(request, 'post/index.html', {'articulos': articulos})
 
 # Vistas de lenguajes
 def php_view(request):
-    # Lógica para PHP
-    return render(request, 'post/php.html')
+    articulos = Articulo.objects.filter(lenguaje='PHP')
+    return render(request, 'post/php.html', {'articulos': articulos})
 
 def python_view(request):
-    # Lógica para Python
-    return render(request, 'post/python.html')
+    articulos = Articulo.objects.filter(lenguaje='Python')
+    return render(request, 'post/python.html', {'articulos': articulos})
 
 def java_view(request):
-    # Lógica para Java
-    return render(request, 'post/java.html')
+    articulos = Articulo.objects.filter(lenguaje='Java')
+    return render(request, 'post/java.html', {'articulos': articulos})
 
 def javascript_view(request):
-    # Lógica para JavaScript
-    return render(request, 'post/javascript.html')
+    articulos = Articulo.objects.filter(lenguaje='JavaScript')
+    return render(request, 'post/javascript.html', {'articulos': articulos})

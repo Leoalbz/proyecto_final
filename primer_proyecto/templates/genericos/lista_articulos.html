@@ -1,20 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-<title>Inicio</title>
+<title>Lista de Articulos</title>
 {% endblock %}
 {% block navegacion %}
 {% include 'nav_bar.html' %}
 {% endblock %}
 {% block contenido %}
-<h2>Lista de Artículos</h2>
+<h1 style="font-family: sans-serif; font-size: 2rem; font-weight: 600; text-align: center;">Lista de Artículos</h1>
 <ul>
     {% for articulo in articulos %}
-        <li>
-            <a href="{% url 'post:leer_articulo' articulo.pk %}">{{ articulo.titulo }}</a> - 
-            {{ articulo.lenguaje }}
-        </li>
+    <li
+        style="list-style: none; display: flex; flex-direction: column; flex-wrap: wrap; margin: 1rem; justify-content: center; align-items: center; text-align: center;">
+        <a href="{% url 'post:leer_articulo' articulo.pk %}">{{ articulo.titulo }}</a>
+        {% if articulo.imagen %}
+        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="50rem">
+        {% endif %}
+        {{ articulo.contenido|slice:"50" }}<br>{{ articulo.lenguaje }}
+    </li>
+    <li style="list-style: none; display: flex; justify-content: center; align-items: center;">
+        <a href="{% url 'post:actualizar_articulo' articulo.pk %}">Editar</a>
+        <a href="{% url 'post:eliminar_articulo' articulo.pk %}">Eliminar</a>
+    </li>
     {% endfor %}
 </ul>
-<a href="{% url 'post:crear_articulo' %}">Crear nuevo artículo</a>
+<a href="{% url 'post:crear_articulo' %}" style="display: flex; justify-content: center; align-items: center;">Crear
+    nuevo artículo</a>
+
 {% endblock %}
+
+<h1>{{ articulo.titulo }}</h1>
+<p>{{ articulo.contenido }}</p>
+<p><strong>Lenguaje:</strong> {{ articulo.lenguaje }}</p>
+{% if articulo.imagen %}
+<img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+{% endif %}
+<p>Publicado el {{ articulo.fecha_publicacion }}</p>

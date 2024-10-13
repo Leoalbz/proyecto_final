@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Eliminar Artículo</title>
-</head>
-<body>
-    <h1>¿Estás seguro que deseas eliminar este artículo?</h1>
-    <p>{{ articulo.titulo }}</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Eliminar</button>
-    </form>
-    <a href="{% url 'lista_articulos' %}">Cancelar</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Inicio</title>
+{% endblock %}
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+{% block contenido %}
+<h1>¿Estás seguro que deseas eliminar este artículo?</h1>
+<p>{{ articulo.titulo }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Eliminar</button>
+</form>
+<a href="{% url 'post:lista_articulos' %}">Cancelar</a>
+{% endblock %}
