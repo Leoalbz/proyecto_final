@@ -1,25 +1,18 @@
-.env
-/media/lenguages/*
-!/media/lenguages/empty
-
-# Entorno virtual
-.venv/
-env/
-venv/
-
-# Archivos de configuración de Django
-*.pyc
+# Python
 __pycache__/
-db.sqlite3
+*.py[cod]
+*.pyo
 
-# Archivos de configuración de IDE
-.idea/
-*.iml
-.vscode/
-
-# Archivos de log
+# Django
 *.log
-
-# Archivos de media y estáticos
+*.sqlite3
+db.sqlite3
 /media/
-staticfiles/
+.env
+
+# Otros
+*.pyc
+*.pkl
+*.egg-info/
+dist/
+build/

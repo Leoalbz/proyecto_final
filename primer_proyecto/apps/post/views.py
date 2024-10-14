@@ -96,8 +96,11 @@ def categoria_view(request):
 # Vista index
 class Index(ListView):
     model = Articulo
-    template_name = 'index.html'
-    context_object_name = 'articulos'
+    template_name = 'index.html' 
+    context_object_name = 'articulos' 
+    
+    def get_queryset(self):
+        return Articulo.objects.all()
 
 # Vistas de lenguajes
 def php_view(request):

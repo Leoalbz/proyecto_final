@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Articulo(models.Model):
     titulo = models.CharField(max_length=100)
-    imagen = models.ImageField(upload_to='articulos/', blank=True, null=True)
+    imagen = models.ImageField(upload_to='articulos/', null=True, blank=True)
     contenido = models.TextField()
     lenguaje = models.CharField(max_length=20)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)

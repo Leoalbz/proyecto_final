@@ -24,8 +24,8 @@
         <p>{{ comentario.contenido }}</p>
         <div>
             {% if request.user == comentario.usuario or request.user.is_staff %}
-            <a href="{% url 'post:editar_comentario' comentario.pk %}">Editar</a>
-            <a href="{% url 'post:eliminar_comentario' comentario.pk %}">Eliminar</a>
+            <a href="{% url 'post:editar_comentario' comentario.pk %}" class="btn btn-secondary btn-sm">Editar</a>
+            <a href="{% url 'post:eliminar_comentario' comentario.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
             {% endif %}
         </div>
     </div>
