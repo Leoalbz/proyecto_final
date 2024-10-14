@@ -18,7 +18,7 @@
     <div class="card-body">
         <h5 class="card-title">{{ p.nombre_articulo}}</h5>
         <p class="card-text">{{p.descripcion_articulo}}</p>
-        <a href="#" class="btn btn-primary">Ver articulo</a>
+        <a href="{% url 'apps.post:mostrar_articulo' p.id %}" class="btn btn-primary">Ver articulo</a>
     </div>
 </div>
 

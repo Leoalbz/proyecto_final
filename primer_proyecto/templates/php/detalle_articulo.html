@@ -1,11 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+<title>{{articulo.titulo}}</title>
+{%endblock %}
+
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+{% if user.is_staff %}
+<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle " type="button" id="dropdownMenuButton1"
+        data-bs-toggle="dropdown" aria-expanded="false">Administrar</button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="{% url 'apps.post:actualizar_articulo' articulo.pk %}">Modificar articulo</a></li>
+        <li><a class="dropdown-item" href="{% url 'apps.post:eliminar_articulo' articulo.pk %}">Eliminar articulo</a></li>
+    </ul>
+    {% endif %}
+    <section data-bs-version="5.1" class="image1 cid-tf6nPGwDQN" id="image1-q">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="image-wrapper">
+                        {% if articulo.imagen %}<img src="{{ articulo.imagen.url }}" class="d-block w-100">
+                        {% else %}<img src="{% static 'img/default_image.jpeg' %}">{% endif %}
+                        <p class="mbr-description mbr-fonts-style pt-2 align-center display-4">{{articulo.fecha_agregado}}</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg">
+                    <div class="text-wrapper">
+                        <h2 class="mbr-section-title mbr-fonts-style mb-3 display-5"><strong>{{articulo.nombre_articulo}}</strong>
+                        </h2>
+                        <h4 class="mbr-text mbr-fonts-style display-7">{{articulo.descripcion_articulo}}</h4>
+                        <p class="mbr-text mbr-fonts-style display-7">{{articulo.articulo}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+       <!-- <div class="mb-3 display-7" style="text-align: center"></div>
+            <p>Opiniones: {{opiniones.count}}</p>
+            {% include 'opiniones/listar_opiniones.html' %}
+        </div>
+        <div class="mb-3 display-7" style="text-align: center">
+            {% include 'opiniones/agregar_opinion.html' %}
+        </div>-->
+    </section>
+
+    {%endblock %}
