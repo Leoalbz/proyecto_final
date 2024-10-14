@@ -1,5 +1,5 @@
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Articulo, Comentario
 from django.shortcuts import render
 from .forms import ComentarioForm
@@ -92,15 +92,6 @@ def categoria_view(request):
     lenguaje = request.GET.get('lenguaje')
     articulos = Articulo.objects.filter(lenguaje=lenguaje) if lenguaje else Articulo.objects.all()
     return render(request, 'post/nav_bar.html', {'articulos': articulos})
-
-# Vista index
-class Index(ListView):
-    model = Articulo
-    template_name = 'index.html' 
-    context_object_name = 'articulos' 
-    
-    def get_queryset(self):
-        return Articulo.objects.all()
 
 # Vistas de lenguajes
 def php_view(request):

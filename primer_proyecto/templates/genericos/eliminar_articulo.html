@@ -11,7 +11,7 @@
 <p>{{ articulo.titulo }}</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Eliminar</button>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
 </form>
-<a href="{% url 'post:leer_articulo' articulo.pk %}">Cancelar</a>
+<a href="{% url 'post:leer_articulo' articulo.pk %}" class="btn btn-secondary">Cancelar</a>
 {% endblock %}
