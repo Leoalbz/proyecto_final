@@ -1,9 +1,11 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Articulo
+from .models import Articulo, Comentario
 from django.shortcuts import render
 from .forms import ComentarioForm
 from django.http import HttpResponseForbidden, JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Listar artículos
@@ -114,4 +116,33 @@ def javascript_view(request):
     articulos = Articulo.objects.filter(lenguaje='JavaScript')
     return render(request, 'post/javascript.html', {'articulos': articulos})
 
-          
+class EditarComentario(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comentario
+    form_class = ComentarioForm
+    template_name = 'comentarios/editar_comentario.html'
+    context_object_name = 'comentario'
+
+    def get_success_url(self):
+        return reverse_lazy('post:leer_articulo', kwargs={'pk': self.object.articulo.pk})
+
+    def test_func(self):
+        comentario = self.get_object()
+        return self.request.user.is_staff or self.request.user == comentario.usuario
+    
+class EliminarComentario(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comentario
+    template_name = 'comentarios/eliminar_comentario.html'
+    context_object_name = 'comentario'
+
+    def get_success_url(self):
+        return reverse_lazy('post:leer_articulo', kwargs={'pk': self.object.articulo.pk})
+
+    def test_func(self):
+        comentario = self.get_object()
+        return self.request.user.is_staff or self.request.user == comentario.usuario
+    
+@staff_member_required
+def listar_comentarios(request):
+    comentarios = Comentario.objects.all()
+    return render(request, 'comentarios/listar_comentarios.html', {'comentarios': comentarios})
+    

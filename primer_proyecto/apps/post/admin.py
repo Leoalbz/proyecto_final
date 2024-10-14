@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Articulo
+from .models import Articulo, Comentario
 
 # Personalizar la administración para el modelo `Articulo`
 class ArticuloAdmin(admin.ModelAdmin):
@@ -8,3 +8,8 @@ class ArticuloAdmin(admin.ModelAdmin):
 
 # Registrar el modelo `Articulo` con la personalización
 admin.site.register(Articulo, ArticuloAdmin)
+
+@admin.register(Comentario)
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'contenido', 'fecha_publicacion', 'articulo')
+    search_fields = ('usuario__username', 'contenido')

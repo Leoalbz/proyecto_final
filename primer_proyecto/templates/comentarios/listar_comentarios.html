@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Gestión de Comentarios</title>
+{% endblock %}
+
+{% block contenido %}
+<h1>Comentarios</h1>
+
+{% if comentarios %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Comentario</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comentario in comentarios %}
+        <tr>
+            <td>{{ comentario.usuario.username }}</td>
+            <td>{{ comentario.contenido }}</td>
+            <td>{{ comentario.fecha_publicacion }}</td>
+            <td>
+                {% if request.user == comentario.usuario or request.user.is_staff %}
+                <!-- Botón para editar -->
+                <a href="{% url 'post:editar_comentario' comentario.pk %}" class="btn btn-secondary btn-sm">Editar</a>
+
+                <!-- Botón para eliminar -->
+                <form action="{% url 'post:eliminar_comentario' comentario.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay comentarios disponibles.</p>
+{% endif %}
+{% endblock %}

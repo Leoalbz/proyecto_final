@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ListaArticulos, LeerArticulo, CrearArticulo, ActualizarArticulo, EliminarArticulo, Index, categoria_view, php_view, python_view, java_view, javascript_view
+from .views import EditarComentario, EliminarComentario, ListaArticulos, LeerArticulo, CrearArticulo, ActualizarArticulo, EliminarArticulo, Index, categoria_view, listar_comentarios, php_view, python_view, java_view, javascript_view
 
 app_name = 'post'
 
@@ -15,5 +15,8 @@ urlpatterns = [
     path('python/', python_view, name='python_view'),
     path('java/', java_view, name='java_view'),
     path('javascript/', javascript_view, name='javascript_view'),
+    path('comentarios/editar/<int:pk>/', EditarComentario.as_view(), name='editar_comentario'),
+    path('comentarios/eliminar/<int:pk>/', EliminarComentario.as_view(), name='eliminar_comentario'),
+    path('comentarios/listar/', listar_comentarios, name='listar_comentarios'),
 ]
  

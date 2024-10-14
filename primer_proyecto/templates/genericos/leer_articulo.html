@@ -20,8 +20,14 @@
 <div id="comentarios">
     {% for comentario in comentarios %}
     <div class="comentario">
-        <strong>{{ comentario.usuario.username }}</strong> <em>{{ comentario.fecha_publicacion }}</em>
+        <strong>{{ comentario.usuario.username }}</strong><em>{{ comentario.fecha_publicacion }}</em>
         <p>{{ comentario.contenido }}</p>
+        <div>
+            {% if request.user == comentario.usuario or request.user.is_staff %}
+            <a href="{% url 'post:editar_comentario' comentario.pk %}">Editar</a>
+            <a href="{% url 'post:eliminar_comentario' comentario.pk %}">Eliminar</a>
+            {% endif %}
+        </div>
     </div>
     {% endfor %}
 </div>
