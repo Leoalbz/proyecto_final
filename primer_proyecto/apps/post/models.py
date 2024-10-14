@@ -6,6 +6,7 @@ class Articulo(models.Model):
     imagen = models.ImageField(upload_to='articulos/', blank=True, null=True)
     contenido = models.TextField()
     lenguaje = models.CharField(max_length=20)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

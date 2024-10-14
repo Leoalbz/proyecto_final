@@ -1,9 +1,9 @@
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Articulo
 from django.shortcuts import render
 from .forms import ComentarioForm
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 
 
 # Listar artículos
@@ -53,18 +53,37 @@ class CrearArticulo(CreateView):
     fields = ['titulo', 'contenido', 'imagen', 'lenguaje']
     success_url = reverse_lazy('post:lista_articulos')
 
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+
 # Actualizar un artículo existente
 class ActualizarArticulo(UpdateView):
     model = Articulo
     template_name = 'genericos/actualizar_articulo.html'
     fields = ['titulo', 'contenido', 'imagen', 'lenguaje']
-    success_url = reverse_lazy('post:lista_articulos')
 
+    def dispatch(self, request, *args, **kwargs):
+        # Verifica si el usuario es el creador del artículo
+        articulo = self.get_object()
+        if articulo.autor != self.request.user:
+            return HttpResponseForbidden("No tienes permiso para editar este artículo.")
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        return reverse('post:leer_articulo', kwargs={'pk': self.object.pk})
 # Eliminar un artículo
 class EliminarArticulo(DeleteView):
     model = Articulo
     template_name = 'genericos/eliminar_articulo.html'
     success_url = reverse_lazy('post:lista_articulos')
+
+    def dispatch(self, request, *args, **kwargs):
+        # Verifica si el usuario es el creador del artículo
+        articulo = self.get_object()
+        if articulo.autor != self.request.user:
+            return HttpResponseForbidden("No tienes permiso para eliminar este artículo.")
+        return super().dispatch(request, *args, **kwargs)
 
 # Filtrar categorias
 def categoria_view(request):
