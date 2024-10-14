@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     #apps personalizadas
     'apps.post',
+    'apps.blog_auth',
 ]
 
 MIDDLEWARE = [

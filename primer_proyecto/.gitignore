@@ -1,3 +1,25 @@
 .env
 /media/lenguages/*
 !/media/lenguages/empty
+
+# Entorno virtual
+.venv/
+env/
+venv/
+
+# Archivos de configuración de Django
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Archivos de configuración de IDE
+.idea/
+*.iml
+.vscode/
+
+# Archivos de log
+*.log
+
+# Archivos de media y estáticos
+/media/
+staticfiles/

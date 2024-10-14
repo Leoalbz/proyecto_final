@@ -2,6 +2,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Articulo
 from django.shortcuts import render
+from .forms import ComentarioForm
+from django.http import JsonResponse
+
 
 # Listar artículos
 class ListaArticulos(ListView):
@@ -14,6 +17,34 @@ class LeerArticulo(DetailView):
     model = Articulo
     template_name = 'genericos/leer_articulo.html'
     context_object_name = 'articulo'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = ComentarioForm()
+        context['comentarios'] = self.object.comentarios.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = ComentarioForm(request.POST)
+
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.articulo = self.object
+            comentario.usuario = request.user
+            comentario.save()
+
+            comentarios = self.object.comentarios.all()
+            return JsonResponse({
+                'success': True,
+                'comentarios': [{
+                    'contenido': c.contenido,
+                    'usuario': c.usuario.username,
+                    'fecha_publicacion': c.fecha_publicacion.strftime("%Y-%m-%d %H:%M:%S"),
+                } for c in comentarios],
+            })
+
+        return JsonResponse({'success': False, 'errors': form.errors})
 
 # Crear un nuevo artículo
 class CrearArticulo(CreateView):
@@ -42,9 +73,10 @@ def categoria_view(request):
     return render(request, 'post/nav_bar.html', {'articulos': articulos})
 
 # Vista index
-def index_view(request):
-    articulos = Articulo.objects.all()
-    return render(request, 'post/index.html', {'articulos': articulos})
+class Index(ListView):
+    model = Articulo
+    template_name = 'index.html'
+    context_object_name = 'articulos'
 
 # Vistas de lenguajes
 def php_view(request):
@@ -62,3 +94,5 @@ def java_view(request):
 def javascript_view(request):
     articulos = Articulo.objects.filter(lenguaje='JavaScript')
     return render(request, 'post/javascript.html', {'articulos': articulos})
+
+          

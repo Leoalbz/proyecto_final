@@ -23,8 +23,22 @@
             {% endif %}
             <p>{{ articulo.contenido }}</p>
             <p>Publicado el {{ articulo.fecha_publicacion }}</p>
-            <a href="{% url 'post:actualizar_articulo' articulo.pk %}">Editar</a>
-            <a href="{% url 'post:eliminar_articulo' articulo.pk %}">Eliminar</a>
+
+            {% if user.is_staff %}
+            <a href="{% url 'post:actualizar_articulo' articulo.pk %}" class="btn btn-secondary">Editar</a>
+            <a href="{% url 'post:eliminar_articulo' articulo.pk %}" class="btn btn-danger">Eliminar</a>
+            {% endif %}
+
+            <h3>Comentarios:</h3>
+            {% if user.is_authenticated %}
+            <form id="comentario-form" method="post" action="{% url 'post:leer_articulo' articulo.pk %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            {% else %}
+            <p>Debes 8<a href="{% url 'users:iniciar_sesion' %}">iniciar sesión</a> para comentar.</p>
+            {% endif %}
         </li>
         {% empty %}
         <li>No hay artículos disponibles.</li>

@@ -17,6 +17,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if user.is_staff %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">Articulos</a>
@@ -25,6 +26,7 @@
               <li><a class="dropdown-item" href="{% url 'post:lista_articulos' %}">Lista de Articulos</a></li>
             </ul>
           </li>
+          {% endif %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">Lenguajes
@@ -34,6 +36,18 @@
               <li><a class="dropdown-item" href="{% url 'post:python_view' %}">Python</a></li>
               <li><a class="dropdown-item" href="{% url 'post:java_view' %}">Java</a></li>
               <li><a class="dropdown-item" href="{% url 'post:javascript_view' %}">JavaScript</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Usuarios
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'users:iniciar_sesion' %}">Iniciar Sesion</a></li>
+              <li><a class="dropdown-item" href="{% url 'users:registrarse' %}">Registrarse</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'users:cerrar_sesion' %}">Cerrar Sesion</a></li>
+              {% endif %}
             </ul>
           </li>
         </ul>

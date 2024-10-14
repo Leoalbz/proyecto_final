@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import ListaArticulos, LeerArticulo, CrearArticulo, ActualizarArticulo, EliminarArticulo, index_view, categoria_view, php_view, python_view, java_view, javascript_view
+from .views import ListaArticulos, LeerArticulo, CrearArticulo, ActualizarArticulo, EliminarArticulo, Index, categoria_view, php_view, python_view, java_view, javascript_view
 
 app_name = 'post'
 
 urlpatterns = [
-    path('', index_view, name='index'),
+    path('', Index.as_view(), name='index'),
     path('articulos/', ListaArticulos.as_view(), name='lista_articulos'),
     path('<int:pk>/', LeerArticulo.as_view(), name='leer_articulo'),
     path('crear/', CrearArticulo.as_view(), name='crear_articulo'),

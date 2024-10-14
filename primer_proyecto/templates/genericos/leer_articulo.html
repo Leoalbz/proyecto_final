@@ -1,18 +1,67 @@
 {% extends 'base.html' %}
+
 {% load static %}
+
 {% block title %}
-<title>Inicio</title>
+<title>{{ articulo.titulo }}</title>
 {% endblock %}
+
 {% block navegacion %}
 {% include 'nav_bar.html' %}
 {% endblock %}
+
 {% block contenido %}
 <h1>{{ articulo.titulo }}</h1>
-{% if articulo.imagen %}
-<img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
-{% endif %}
+<img src="{{ articulo.imagen.url }}" alt="Imagen de {{ articulo.titulo }}">
 <p>{{ articulo.contenido }}</p>
-<p><strong>Lenguaje:</strong> {{ articulo.lenguaje }}</p>
 
-<p>Publicado el {{ articulo.fecha_publicacion }}</p>
+<h2>Comentarios:</h2>
+<div id="comentarios">
+    {% for comentario in comentarios %}
+        <div class="comentario">
+            <strong>{{ comentario.usuario.username }}</strong> <em>{{ comentario.fecha_publicacion }}</em>
+            <p>{{ comentario.contenido }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<form id="comentario-form" method="post" action="{% url 'post:leer_articulo' articulo.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<script>
+document.getElementById('comentario-form').onsubmit = function(event) {
+    event.preventDefault();  // Evitar el envío normal del formulario
+    var formData = new FormData(this);  // Crear un objeto FormData con el formulario
+
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Actualizar la lista de comentarios en la página
+            var comentariosDiv = document.getElementById('comentarios');
+            data.comentarios.forEach(function(comentario) {
+                var comentarioDiv = document.createElement('div');
+                comentarioDiv.className = 'comentario';
+                comentarioDiv.innerHTML = '<strong>' + comentario.usuario + '</strong> <em>' + comentario.fecha_publicacion + '</em>' +
+                    '<p>' + comentario.contenido + '</p>';
+                comentariosDiv.appendChild(comentarioDiv);
+            });
+            // Limpiar el formulario
+            document.getElementById('comentario-form').reset();
+        } else {
+            // Manejar errores del formulario
+            console.log(data.errors);
+        }
+    });
+};
+</script>
 {% endblock %}

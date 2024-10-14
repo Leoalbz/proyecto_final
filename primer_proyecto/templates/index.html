@@ -9,22 +9,19 @@
 
 {% block contenido %}
 <div class="card text-bg-dark" width="100%" height="auto">
-    <img class="card-img" src="{% static 'img/banner.png' %}" alt="Banner" width="100%" height="auto">
+    <img src="{% static 'img/Banner.png' %}" class="img-fluid" alt="{{ contenido.titulo }}" width="100%" height="auto">
 </div>
-<section>
-<h1>Artículos</h1>
-<ul>
-    {% if articulo in articulos %}
-    <li style="list-style: none;">
-        <h2>{{ articulo.titulo }}</h2>
-        {% if articulo.imagen %}
-        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
-        {% endif %}
-        <p>{{ articulo.contenido }}</p>
-        <p>Publicado el {{ articulo.fecha_publicacion }}</p>
-    </li>
-    {% else %}
-    <li>No hay artículos disponibles.</li>
-    {% endif %}
-</ul>
-{% endblock %}
+<body>
+    <h1>Artículos</h1>
+    <ul>
+        {% for articulo in articulos %}
+            <li>
+                <h2>{{ articulo.titulo }}</h2>
+                <p>{{ articulo.contenido }}</p>
+                <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
+                <a href="{% url 'post:leer_articulo' %}">Leer más</a>  <!-- Asegúrate de que 'leer_articulo' sea el nombre correcto de tu URL para ver detalles del artículo -->
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+    {% endblock %}

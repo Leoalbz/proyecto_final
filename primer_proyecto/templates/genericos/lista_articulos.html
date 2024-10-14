@@ -18,9 +18,9 @@
         {% endif %}
         {{ articulo.contenido|slice:"50" }}<br>{{ articulo.lenguaje }}
     </li>
-    <li style="list-style: none; display: flex; justify-content: center; align-items: center;">
-        <a href="{% url 'post:actualizar_articulo' articulo.pk %}">Editar</a>
-        <a href="{% url 'post:eliminar_articulo' articulo.pk %}">Eliminar</a>
+    <li style="list-style: none; display: flex; justify-content: center;">
+        <a href="{% url 'post:actualizar_articulo' articulo.pk %}" style="margin: 2px;" class="btn btn-secondary">Editar</a>
+        <a href="{% url 'post:eliminar_articulo' articulo.pk %}" style="margin: 2px;" class="btn btn-danger">Eliminar</a>
     </li>
     {% endfor %}
 </ul>
