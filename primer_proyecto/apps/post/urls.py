@@ -18,4 +18,3 @@ urlpatterns = [
     path('comentarios/eliminar/<int:pk>/', EliminarComentario.as_view(), name='eliminar_comentario'),
     path('comentarios/listar/', listar_comentarios, name='listar_comentarios'),
 ]
- 

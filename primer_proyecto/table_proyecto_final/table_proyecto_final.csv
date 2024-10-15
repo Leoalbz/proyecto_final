@@ -1,0 +1,303 @@
+"id";"titulo";"imagen";"contenido";"lenguaje";"fecha_publicacion";"autor_id"
+1;"Creación de imágenes dinámicas con PHP";"articulos/article_02020_.png";"Una imagen dinámica es un fichero PHP que contiene las instrucciones para su creación.
+Para visualizar una imagen dinámica desde una página web basta con invocar desde la etiqueta
+clásica de inserción de imágenes de HTML:
+<img src=""nombre del fichero PHP que la genera"">
+Primera etiqueta
+Una vez conocidos los formatos que soporta nuestra versión ya podemos generar imágenes en
+cualquiera de esos formatos.
+Vimos un script que nos permite saber esto en la unidad anterior. Para el ejemplo, trabajaremos
+con dos formatos: JPG y PNG.
+Cabe aclarar desde el principio, que en algunas versiones de servidor local, se han comprobado
+problemas al mostrar ciertas imágenes dinámicas en formato PNG, cosa que no sucede una vez
+colocado on-line el script, sobre todo cuando el PNG no posee color de fondo.
+La primera instrucción de un fichero de creación de imágenes dinámicas ha de ser:
+header(""Content-type: image/jpeg"")
+si se trata de crear una imagen JPG o:
+header(""Content-type: image/png"")
+si pretendemos que la imagen tenga formato PNG
+Funciones PHP para esos procesos:
+$nombre = imagecreate(ancho,alto)
+Con esta función creamos una imagen con el tamaño especificado (ancho y alto) en pixeles que es
+recogida en la variable nombre. Esta función es idéntica para cualquier formato de imagen.
+Envío de imágenes al navegador 
+Ejemplo: imagejpeg($nombre) 
+Eliminar imágenes de la memoria
+Independientemente del formato utilizado para borrar imágenes de la memoria (no del
+navegador) se utiliza la siguiente sintaxis:
+imagedestroy($nombre)  y se utiliza al final del codigo sin excepción";"PHP";"2024-10-15 09:53:40.836770";1
+2;"Manejo de arrays con Javascript";"articulos/METODOS_DE_ARRAYS_EN_JS.jpg";"El objeto Array de JavaScript es un objeto global que es usado en la construcción de arrays, que son objetos tipo lista de alto nivel.
+Descripción
+Los arrays son objetos similares a una lista cuyo prototipo proporciona métodos para efectuar operaciones de recorrido y de mutación. Tanto la longitud como el tipo de los elementos de un array son variables. Dado que la longitud de un array puede cambiar en cualquier momento, y los datos se pueden almacenar en ubicaciones no contiguas, no hay garantía de que los arrays de JavaScript sean densos; esto depende de cómo el programador elija usarlos. En general estas características son cómodas, pero si, en su caso particular, no resultan deseables, puede considerar el uso de arrays con tipo.
+
+Operaciones habituales
+Crear un Array
+let frutas = [""Manzana"", ""Banana""];
+
+console.log(frutas.length);
+// 2
+
+Acceder a un elemento de Array mediante su índice
+
+let primero = frutas[0];
+// Manzana
+
+let ultimo = frutas[frutas.length - 1];
+// Banana
+
+Recorrer un Array
+frutas.forEach(function (elemento, indice, array) {
+  console.log(elemento, indice);
+});
+// Manzana 0
+// Banana 1
+
+Añadir un elemento al final de un Array
+let nuevaLongitud = frutas.push(""Naranja""); // Añade ""Naranja"" al final
+// [""Manzana"", ""Banana"", ""Naranja""]
+Eliminar el último elemento de un Array
+js
+Copy to Clipboard
+let ultimo = frutas.pop(); // Elimina ""Naranja"" del final
+// [""Manzana"", ""Banana""]
+
+Añadir un elemento al principio de un Array
+let nuevaLongitud = frutas.unshift(""Fresa""); // Añade ""Fresa"" al inicio
+// [""Fresa"" ,""Manzana"", ""Banana""]
+
+Eliminar el primer elemento de un Array
+let primero = frutas.shift(); // Elimina ""Fresa"" del inicio
+// [""Manzana"", ""Banana""]
+
+Encontrar el índice de un elemento del Array
+frutas.push(""Fresa"");
+// [""Manzana"", ""Banana"", ""Fresa""]
+
+let pos = frutas.indexOf(""Banana""); // (pos) es la posición para abreviar
+// 1";"Javascript";"2024-10-15 10:10:21.176735";1
+3;"Bucle Do... While - Javascript";"articulos/1-52.jpg";"La sentencia (hacer mientras) crea un bucle que ejecuta una sentencia especificada, hasta que la condición de comprobación se evalúa como falsa. La condición se evalúa después de ejecutar la sentencia, dando como resultado que la sentencia especificada se ejecute al menos una vez.
+
+Sintaxis
+do
+  sentencia
+while (condición);
+sentencia
+Una sentencia que se ejecuta al menos una vez y es reejecutada cada vez que la condición se evalúa a verdadera. Para ejecutar múltiples sentencias dentro de un bucle, utilice la sentencia block ({ ... }) para agrupar aquellas sentencias.
+
+condición
+Una expresión se evalúa después de cada pase del bucle. Si condición se evalúa como verdadera, la sentencia se re-ejecuta. Cuando condición se evalúa como falsa, el control pasa a la siguiente sentencia hacer mientras.
+
+Ejemplos
+Usando hacer mientras
+En el siguiente ejemplo, el bucle hacer mientras itera al menos una vez y se reitera hasta que i ya no sea menor que 5.
+
+do {
+  i += 1;
+  document.write(i);
+} while (i < 5);";"Javascript";"2024-10-15 10:20:59.155965";1
+4;"Switch - Javascript";"articulos/que-es-javascript-descubre-sus-5-principales-usos.jpg";"La declaración switch evalúa una expresión, comparando el valor de esa expresión con una instancia case, y ejecuta declaraciones asociadas a ese case, así como las declaraciones en los case que siguen.
+
+Syntaxis
+switch (expresión) {
+  case valor1:
+    //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
+    [break;]
+  case valor2:
+    //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
+    [break;]
+  ...
+  case valorN:
+    //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
+    [break;]
+  default:
+    //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+    [break;]
+}
+expresión
+Es una expresión que es comparada con el valor de cada instancia case.
+
+case valorN
+Una instancia case valorN es usada para ser comparada con la expresión. Si la expresión coincide con el valorN, las declaraciones dentro de la instancia case se ejecutan hasta que se encuentre el final de la declaración switch o hasta encontrar una interrupción break.
+
+default
+Una instancia default, cuando es declarada, es ejecutada si el valor de la expresión no coincide con cualquiera de las otras instancias case valorN.
+
+Descripción
+Si ocurre una coincidencia, el programa ejecuta las declaraciones asociadas correspondientes. Si la expresión coincide con múltiples entradas, la primera será la seleccionada, incluso si las mayúsculas son tenidas en cuenta.
+
+El programa primero busca la primer instacia case cuya expresión se evalúa con el mismo valor de la expresión de entrada (usando comparación estricta, ===) y luego transfiere el control a esa cláusula, ejecutando las declaraciones asociadas. Si no se encuentra una cláusula de case coincidente, el programa busca la cláusula default opcional, y si se encuentra, transfiere el control a esa instancia, ejecutando las declaraciones asociadas. Si no se encuentra una instancia default el programa continúa la ejecución en la instrucción siguiente al final del switch. Por convención, la instancia default es la última cláusula, pero no tiene que ser así.
+
+La declaración break es opcional y está asociada con cada etiqueta de case y asegura que el programa salga del switch una vez que se ejecute la instrucción coincidente y continúe la ejecución en la instrucción siguiente. Si se omite el break el programa continúa la ejecución en la siguiente instrucción en la declaración de switch .";"Javascript";"2024-10-15 10:39:20.948843";1
+5;"Manejo de fechas con PHP";"articulos/fecha_hora_php.png";"Introducción
+Estas funciones le permiten obtener la fecha y hora del servidor en donde están siendo ejecutados
+los scripts PHP. Podemos usar estas funciones para dar formato a las fechas y horas en muchas
+maneras diferentes.
+
+Veremos algunas de las mas importantes con ejemplos en este apunte. Pueden encontrar la lista
+completa de funciones de fecha y hora en el manual de PHP
+http://php.net/manual/es/ref.datetime.php
+
+Función date()
+El manejo de fechas es un tema muy importante. Manejar esta función es bastante sencillo,
+podemos usarla añadiendo su valor a una variable y además especificando el tiempo que
+queremos manejar, es decir, año, mes, día etc.
+
+Ejemplo:
+<?php
+$prueba = date(""Y/m/d"");
+Echo ""Hoy es: "".date(""d/m/Y"");
+echo ""<br/>"";
+if ($prueba < ""2020/11/01"")
+{
+echo ""Sitio web en mantenimiento hasta el 01/11/2020"";
+}
+else
+{
+echo ""Bienvenido a nuestro sitio!"";
+}
+?>
+Como verán esto es un simple programa que efectúa un condicional, si la fecha es menor al año
+2020, mes de Noviembre, día 1, mostrará un mensaje por pantalla: “Sitio web en mantenimiento“, de lo contrario muestra un mensaje de bienvenida.
+
+Función time()
+Para mostrar la hora en PHP además de la propia función date(), podemos utilizar la función
+time().
+La función time() nos devolverá la hora de la fecha actual en el formato timestamp.
+El término timestamp en PHP sirve para llevar un registro de la fecha y hora. Y lo que hace
+exactamente para ello es calcular el tiempo transcurrido en segundos desde la fecha que toma por referencia, el 1 de Enero de 1970. Así que por ejemplo el numero 86400, correspondería al día
+2 de Enero de 1970 a las 00:00, ya que 86400 son los segundos que tiene un día.
+
+función date_default_timezone_set()
+Establece el huso horario que utilizan las funciones de fecha y hora.
+El manual de PHP contiene la lista de identificadores de zonas horarias válidas.
+Ver: http://www.php.net/manual/es/timezones.php";"PHP";"2024-10-15 10:43:38.711778";1
+6;"Funciones para manejo de archivos en PHP";"articulos/article_02020__A39gwWf.png";"FUNCIONES PARA EL MANEJO DE ARCHIVOS
+Abrir Archivos
+Para abrir archivos, se utiliza la función fopen, cuya sintaxis es la siguiente:
+fopen (nombre_archivo, modo);
+
+En donde, nombre_archivo es el nombre del archivo que se quiere abrir o crear y el modo indica
+de qué forma se procederá a la apertura del archivo. Los distintos modos se comentan en los
+ejemplos siguientes:
+
+fopen (archivo.txt, ‘a’)
+Abre el archivo en modo de agregar información. Los datos que se ingresen se agregarán al final
+del mismo, sin eliminar el contenido que tuviera. En este modo, si el archivo no existe, lo creará
+en ese momento.
+
+fopen (archivo.txt, ‘a+’)
+Abre el archivo en modo de agregar información y además leerlo. Los datos que se ingresen se
+agregarán al final del mismo, sin eliminar el contenido que tuviera. En este modo, si el archivo no
+existe, lo creará en ese momento.
+
+fopen (archivo.txt, ‘r’)
+Abre el archivo en modo lectura solamente. El archivo debe existir.
+
+fopen (archivo.txt, ‘r+’)
+Abre el archivo en modo lectura y escritura. La información que se agregue, será insertada al
+principio del archivo.
+
+fopen (archivo.txt, ‘w’)
+Abre el archivo en modo escritura solamente. Si el archivo no existe, lo crea, y si existe con algún
+contenido, elimina toda su información, dejándolo en blanco.
+
+fopen (archivo.txt, ‘w+’)
+Abre el archivo en modo escritura y lectura. Si el archivo no existe, lo crea, y si existe con algún
+contenido, elimina toda su información, dejándolo en blanco.
+
+Unidad 3 – Ficheros y directorios
+Cerrar Archivos
+Luego de abrir un archivo y realizar las operaciones necesarias en él, se debe cerrarlo. Para cerrar
+un archivo se utiliza la función fclose() que recibe como parámetro la variable del archivo que se
+está utilizando.
+Ejemplo:
+$f = fopen(""archi.txt"", ‘r’);
+fclose($f);";"PHP";"2024-10-15 10:47:11.581584";1
+7;"Introduccion a programación funcional en Python";"articulos/5-tips-to-make-your-python-code-more-functional.jpg";"Una función es un bloque de código diseñado para realizar una tarea específica. Una función toma una entrada, realiza una operación y puede devolver un valor. Nos ayuda a evitar la repetición de código y a descomponer programas complejos en tareas más simples y manejables.
+
+Principios de la programación funcional
+Inmutabilidad: Los datos no se modifican después de
+ser creados. En su lugar, se crean nuevas versiones de
+los datos.
+
+Funciones puras: Las funciones no tienen efectos
+secundarios, es decir, no modifican el estado externo.
+Composición de funciones: Las funciones pueden ser
+combinadas para crear funciones más complejas.
+
+Recursión: Se utiliza en lugar de bucles para repetir
+operaciones.
+Funciones de alto orden: Pueden tomar funciones
+como argumentos o devolver funciones como resultado.
+
+Ahora que comenzamos a cambiar el paradigma, veremos
+que los códigos se pueden mejorar aún más, y el uso de la
+programación funcional nos ayuda:
+
+Código más limpio y conciso: Al evitar efectos secundarios, el código es más fácil de entender y mantener.
+
+Mayor seguridad: La inmutabilidad reduce la posibilidad de
+errores causados por modificaciones accidentales de
+datos.
+
+Fácil de probar: Las funciones puras son más fáciles de
+probar de forma aislada.
+
+Paralelismo y concurrencia: La programación funcional se
+adapta bien a la ejecución en paralelo, ya que las funciones
+puras no comparten estado.";"Python";"2024-10-15 10:52:17.171367";1
+8;"Métodos más comunes para listas en Python";"articulos/1366_2000.jpg";"Específicamente las listas son colecciones ordenadas y
+mutables de elementos, donde cada elemento puede
+ser de cualquier tipo de dato (números, cadenas de
+caracteres, booleanos, etc). Son ideales para almacenar
+y gestionar conjuntos de datos relacionados.
+Algo importante a aclarar es que, un método no es lo
+mismo que una función ya que, una función puede usarse de
+manera global, pero un método sólo puede llamarse desde
+un objeto específico.
+
+Método append(parámetro) : Este método sirve
+para agregar un elemento al final de la lista.
+
+Método remove(parámetro) : Mediante este
+método, se buscará y se eliminará, dentro de la lista,
+el primer elemento que se encuentre con el valor del
+parámetro que le asignemos.
+
+clear() : Elimina todos los elementos de la lista.
+
+insert(posición, parámetro) : Inserta un elemento
+en una posición determinada. Posición llevará el
+número de la posición del índice donde se quiere
+insertar el argumento.
+
+index(parámetro) : Devuelve el número de
+índice en el que se encuentra el argumento.
+
+count(parámetro) : Devuelve el número de
+elementos con el valor del argumento pasado.
+
+Recuerda que puedes encontrar mas métodos en la documentación oficial de python.";"Python";"2024-10-15 10:58:23.410439";1
+9;"Variables en Java";"articulos/Razones-para-aprender-a-programar-con-Java-1200x675.jpg";"El lenguaje de programación Java define los siguientes tipos de variables:
+
+Variables de instancia (campos no estáticos) Técnicamente hablando, los objetos almacenan sus estados individuales en ""campos no estáticos"", es decir, campos declarados sin la staticpalabra clave. Los campos no estáticos también se conocen como variables de instancia porque sus valores son únicos para cada instancia de una clase (para cada objeto, en otras palabras); el currentSpeed de una bicicleta es independiente del currentSpeed de otra.
+Variables de clase (campos estáticos) Una variable de clase es cualquier campo declarado con el staticmodificador ; esto le dice al compilador que existe exactamente una copia de esta variable, independientemente de cuántas veces se haya instanciado la clase. Un campo que define la cantidad de marchas para un tipo particular de bicicleta podría marcarse como staticya que conceptualmente se aplicará la misma cantidad de marchas a todas las instancias. El código static int numGears = 6;crearía un campo estático de este tipo. Además, finalse podría agregar la palabra clave para indicar que la cantidad de marchas nunca cambiará.
+Variables locales De manera similar a cómo un objeto almacena su estado en campos, un método a menudo almacenará su estado temporal en variables locales . La sintaxis para declarar una variable local es similar a la de declarar un campo (por ejemplo, int count = 0;). No existe una palabra clave especial que designe una variable como local; esa determinación proviene completamente de la ubicación en la que se declara la variable, que está entre las llaves de apertura y cierre de un método. Como tal, las variables locales solo son visibles para los métodos en los que se declaran; no son accesibles desde el resto de la clase.
+Parámetros Ya has visto ejemplos de parámetros, tanto en la Bicycleclase como en el mainmétodo de la aplicación ""Hello World!"". Recuerda que la firma del mainmétodo es public static void main(String[] args). Aquí, la argsvariable es el parámetro de este método. Lo importante que hay que recordar es que los parámetros siempre se clasifican como ""variables"", no como ""campos"". Esto también se aplica a otras construcciones que aceptan parámetros (como constructores y controladores de excepciones) que aprenderás más adelante en el tutorial.
+Dicho esto, el resto de este tutorial utiliza las siguientes pautas generales al analizar campos y variables. Si hablamos de ""campos en general"" (excluyendo variables locales y parámetros), podemos decir simplemente ""campos"". Si la discusión se aplica a ""todo lo anterior"", podemos decir simplemente ""variables"". Si el contexto requiere una distinción, utilizaremos términos específicos (campo estático, variables locales, etc.) según corresponda. Es posible que también vea ocasionalmente el término ""miembro"". Los campos, métodos y tipos anidados de un tipo se denominan colectivamente miembros .";"Java";"2024-10-15 11:02:03.137688";1
+10;"Expresiones - Java";"articulos/Logo_6.png";"Una expresión es una construcción formada por variables, operadores e invocaciones de métodos, que se construyen según la sintaxis del lenguaje y que dan como resultado un único valor. Ya has visto ejemplos de expresiones, ilustrados en negrita a continuación:
+
+int cadence = 0;
+anArray[0] = 100;
+System.out.println(""Element 1 at index 0: "" + anArray[0]);
+
+int result = 1 + 2; // result is now 3
+if (value1 == value2) 
+    System.out.println(""value1 == value2"");
+El tipo de datos del valor devuelto por una expresión depende de los elementos utilizados en la expresión. La expresión cadence = 0devuelve un intporque el operador de asignación devuelve un valor del mismo tipo de datos que su operando de la izquierda; en este caso, cadencees un int. Como puede ver en las otras expresiones, una expresión también puede devolver otros tipos de valores, como booleano String.
+
+El lenguaje de programación Java permite construir expresiones compuestas a partir de varias expresiones más pequeñas, siempre que el tipo de datos requerido por una parte de la expresión coincida con el tipo de datos de la otra. A continuación, se muestra un ejemplo de una expresión compuesta:
+
+ 
+1 * 2 * 3
+En este ejemplo en particular, el orden en el que se evalúa la expresión no es importante porque el resultado de la multiplicación es independiente del orden; el resultado siempre es el mismo, sin importar en qué orden se apliquen las multiplicaciones. Sin embargo, esto no es cierto para todas las expresiones.";"Java";"2024-10-15 11:03:57.212222";1

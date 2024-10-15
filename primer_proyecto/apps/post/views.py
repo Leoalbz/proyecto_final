@@ -139,4 +139,3 @@ class EliminarComentario(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def listar_comentarios(request):
     comentarios = Comentario.objects.all()
     return render(request, 'comentarios/listar_comentarios.html', {'comentarios': comentarios})
-    
