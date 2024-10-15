@@ -14,7 +14,7 @@
 <div class="card text-bg-dark" width="100%" height="auto">
     <img src="{% static 'img/Banner.png' %}" class="img-fluid" alt="{{ contenido.titulo }}" width="100%" height="auto">
 </div>
-    <h1>Artículos</h1>
+    <h1 class="text-center">Artículos</h1>
 
     {% if articulos %}
         <ul>
@@ -24,9 +24,8 @@
                     {% if articulo.imagen %}
                         <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="150">
                     {% endif %}
-                    <p>{{ articulo.contenido|truncatewords:30 }}</p>
                     <p>Publicado el {{ articulo.fecha_publicacion }}</p>
-                </li>
+                </li>     
             {% endfor %}
         </ul>
     {% else %}

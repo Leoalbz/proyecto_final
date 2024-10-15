@@ -23,7 +23,6 @@
             {% if articulo.imagen %}
             <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
             {% endif %}
-            <p>{{ articulo.contenido }}</p>
             <p><strong>Autor:</strong> {{ articulo.autor.username }}</p>
             <p>Publicado el {{ articulo.fecha_publicacion }}</p>
             <a href="{% url 'post:leer_articulo' articulo.pk %}" class="btn btn-secondary">Leer mas</a>
