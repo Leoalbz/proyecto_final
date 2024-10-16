@@ -22,3 +22,13 @@ class Comentario(models.Model):
 
     def __str__(self):
         return f"{self.usuario.username}: {self.contenido}"
+
+class Contacto(models.Model):
+    nombre = models.CharField(max_length = 30)
+    apellido = models.CharField(max_length = 50)
+    email = models.EmailField(max_length=100)
+    mensaje = models.TextField()
+    fecha_contacto = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f'Mensaje de {self.nombre} {self.apellido}'

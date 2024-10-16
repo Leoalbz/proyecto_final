@@ -48,8 +48,9 @@
               <li><a class="dropdown-item" href="{% url 'users:registrarse' %}">Registrarse</a></li>
               {% if user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'users:cerrar_sesion' %}">Cerrar Sesion</a></li>
-              {% endif %}
             </ul>
+            <li class="nav-item dropdown"><a class="nav-link" href="{% url 'post:contacto' %}">Contáctanos</a></li>
+            {% endif %}
           </li>
         </ul>
       </div>

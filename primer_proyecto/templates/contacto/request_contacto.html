@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<title>Contacto</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+<h1>Nos contactaremos a la brevedad</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+
+{% endblock %}

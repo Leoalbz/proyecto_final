@@ -1,6 +1,6 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import Articulo, Comentario
+from .models import Articulo, Comentario, Contacto
 from django.shortcuts import render
 from .forms import ComentarioForm
 from django.http import HttpResponseForbidden, JsonResponse
@@ -139,3 +139,12 @@ class EliminarComentario(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def listar_comentarios(request):
     comentarios = Comentario.objects.all()
     return render(request, 'comentarios/listar_comentarios.html', {'comentarios': comentarios})
+
+
+
+class RequestDeContacto(CreateView):
+    model = Contacto
+    template_name = 'contacto/request_contacto.html'
+    fields = ['nombre', 'apellido', 'email', 'mensaje']
+    success_url = reverse_lazy('index')
+
