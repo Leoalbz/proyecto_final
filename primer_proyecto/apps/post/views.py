@@ -140,8 +140,6 @@ def listar_comentarios(request):
     comentarios = Comentario.objects.all()
     return render(request, 'comentarios/listar_comentarios.html', {'comentarios': comentarios})
 
-
-
 class RequestDeContacto(CreateView):
     model = Contacto
     template_name = 'contacto/request_contacto.html'

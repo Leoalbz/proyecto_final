@@ -21,15 +21,15 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 LOGIN_URL = reverse_lazy('apps.blog_auth:iniciar_sesion')
-LOGIN_REDIRECT_URL = reverse_lazy('inicio')
-LOGOUT_REDIRECT_URL = reverse_lazy('inicio')
+LOGIN_REDIRECT_URL = reverse_lazy('index')
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r@b6cpnpd*pw6&t$g3q#y=(=(fq#3(_uft(zla8w4pibmbrhl6'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

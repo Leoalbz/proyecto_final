@@ -11,22 +11,30 @@
 {% endblock %}
 
 {% block contenido %}
-<h1 style="font-family: sans-serif; font-size: 2rem; font-weight: 600; text-align: center;">Lista de Artículos</h1>
-<ul>
+<section class="column">
+<h1 class="title" style="font-family: sans-serif; font-size: 2rem; font-weight: 900; text-align: center; color: #FFFFFF; font-size: 3rem;">Lista de Artículos</h1>
+
+
+<ul class="column">
     {% for articulo in articulos %}
-    <li
-        style="list-style: none; display: flex; flex-direction: column; flex-wrap: wrap; margin: 1rem; justify-content: center; align-items: center; text-align: center;">
-        <a href="{% url 'post:leer_articulo' articulo.pk %}">{{ articulo.titulo }}</a>
-        {% if articulo.imagen %}
-        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="50rem">
-        {% endif %}
-        {{ articulo.contenido|slice:"50" }}<br>{{ articulo.lenguaje }}
+    <li style="list-style: none; display: flex; flex-direction: column; flex-wrap: wrap; margin: 1rem; justify-content: center; align-items: center; text-align: center;">
+        <div class="card" style="width: 18rem; align-items: center;">
+            {% if articulo.imagen %}
+            <img class="card-img-top" src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
+            {% endif %}
+            <div class="column card-body">
+              <h5 class="card-title title is-5" style="color: #FFFFFF;">{{ articulo.titulo }}</h5>
+              <p class="column card-text" style="color: #FFFFFF;">{{ articulo.contenido|slice:"50" }}</p>
+              <p class="subtitle" style="color: #FFFFFF;">{{ articulo.lenguaje }}</p> 
+              <a href="{% url 'post:leer_articulo' articulo.pk %}" class="button is-primary is-small has-text-white mb-4 mt-4">Leer mas</a>
+            </div>
+          </div>
     </li>
     <li style="list-style: none; display: flex; justify-content: center;">
         <a href="{% url 'post:actualizar_articulo' articulo.pk %}" style="margin: 2px;"
-            class="btn btn-secondary">Editar</a>
+        class="button is-link is-small has-text-white mb-2 mt-2">Editar</a>
         <a href="{% url 'post:eliminar_articulo' articulo.pk %}" style="margin: 2px;"
-            class="btn btn-danger">Eliminar</a>
+        class="button is-danger is-small has-text-white mb-2 mt-2">Eliminar</a>
     </li>
     {% endfor %}
 </ul>
@@ -35,4 +43,5 @@
         style="display: flex; justify-content: center; align-items: center; width: 15rem;">Crear
         nuevo artículo</a>
 </div>
+</section>
 {% endblock %}

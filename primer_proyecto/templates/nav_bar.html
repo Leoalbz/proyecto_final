@@ -1,16 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Navegación</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="column navbar navbar-expand-sm" style="background-color: #003049;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+      <a class="navbar-brand subtitle" style="color: #FFFFFF;" href="{% url 'index' %}"><i class="bi bi-house" style="font-size: 24pt; color: #669BBC;"></i></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,38 +20,49 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {% if user.is_staff %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" style="color: #669BBC;" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">Articulos</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'post:crear_articulo' %}">Crear Articulo</a></li>
-              <li><a class="dropdown-item" href="{% url 'post:lista_articulos' %}">Lista de Articulos</a></li>
-              <li><a class="dropdown-item" href="{% url 'post:listar_comentarios' %}">Lista de Comentarios</a></li>
+            <ul class="dropdown-menu" style="background-color: #003049;">
+              <li><a class="dropdown-item" style="color: #FFFFFF; background-color: #003049;"
+                  href="{% url 'post:crear_articulo' %}">Crear Articulo</a></li>
+              <li><a class="dropdown-item" style="color: #FFFFFF; background-color: #003049;"
+                  href="{% url 'post:lista_articulos' %}">Lista de Articulos</a></li>
+              <li><a class="dropdown-item" style="color: #FFFFFF; background-color: #003049;"
+                  href="{% url 'post:listar_comentarios' %}">Lista de Comentarios</a></li>
             </ul>
           </li>
           {% endif %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" style="color: #669BBC;" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">Lenguajes
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'post:php_view' %}">PHP</a></li>
-              <li><a class="dropdown-item" href="{% url 'post:python_view' %}">Python</a></li>
-              <li><a class="dropdown-item" href="{% url 'post:java_view' %}">Java</a></li>
-              <li><a class="dropdown-item" href="{% url 'post:javascript_view' %}">JavaScript</a></li>
+            <ul class="dropdown-menu" style="background-color: #003049;">
+              <li><a class="dropdown-item" style="color: #F1FAEE; background-color: #003049;"
+                  href="{% url 'post:php_view' %}">PHP</a></li>
+              <li><a class="dropdown-item" style="color: #F1FAEE; background-color: #003049;"
+                  href="{% url 'post:python_view' %}">Python</a></li>
+              <li><a class="dropdown-item" style="color: #F1FAEE; background-color: #003049;"
+                  href="{% url 'post:java_view' %}">Java</a></li>
+              <li><a class="dropdown-item" style="color: #F1FAEE; background-color: #003049;"
+                  href="{% url 'post:javascript_view' %}">JavaScript</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+          <li class="nav-item dropdown is-right">
+            <a class="nav-link dropdown-toggle" style="color: #669BBC;" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">Usuarios
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'users:iniciar_sesion' %}">Iniciar Sesion</a></li>
-              <li><a class="dropdown-item" href="{% url 'users:registrarse' %}">Registrarse</a></li>
+            <ul class="dropdown-menu" style="background-color: #003049;">
+              <li><a class="dropdown-item" style="background-color: #003049;"
+                  href="{% url 'users:iniciar_sesion' %}">Iniciar Sesion</a></li>
+              <li><a class="dropdown-item" style="background-color: #003049;"
+                  href="{% url 'users:registrarse' %}">Registrarse</a></li>
               {% if user.is_authenticated %}
-              <li><a class="dropdown-item" href="{% url 'users:cerrar_sesion' %}">Cerrar Sesion</a></li>
+              <li><a class="dropdown-item" style="background-color: #003049;"
+                  href="{% url 'users:cerrar_sesion' %}">Cerrar Sesion</a></li>
             </ul>
-            <li class="nav-item dropdown"><a class="nav-link" href="{% url 'post:contacto' %}">Contáctanos</a></li>
-            {% endif %}
+          <li class="nav-item dropdown"><a class="nav-link subtitle" style="color: #669BBC;"
+              href="{% url 'post:contacto' %}">Contáctanos</a></li>
+          {% endif %}
           </li>
         </ul>
       </div>

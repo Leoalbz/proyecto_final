@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.views import View
+from .forms import RegistroForm
 
 class InicioSesion(View):
     def get(self, request):
@@ -22,19 +22,22 @@ class InicioSesion(View):
 class CerrarSesion(View):
     def get(self, request):
         logout(request)
-        return redirect('index')  
+        return redirect('index')
 
 class Registro(View):
     def get(self, request):
-        form = UserCreationForm()
+        form = RegistroForm()
         return render(request, 'users/registrarse.html', {'form': form})
 
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')
+            messages.success(request, 'Registro exitoso. ¡Bienvenido!')
+            return redirect('index') 
         else:
             messages.error(request, 'Error en el registro. Por favor corrige los errores.')
             return render(request, 'users/registrarse.html', {'form': form})
+
+
