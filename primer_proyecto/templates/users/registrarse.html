@@ -17,7 +17,7 @@
     <div class="column container" style="width: 50%; margin: 0 auto;">
 
         <form class="column" style="margin: 0 auto;" id="registration-form" action="{% url 'users:registrarse' %}"
-            method="post">
+            method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="column">
                 <label for="username">Nombre de usuario:</label>
@@ -33,8 +33,8 @@
             </div>
 
             <div class="column">
-                <label for="password">Contraseña:</label>
-                <input class="input" type="password" id="password" name="password" placeholder="Contraseña" required>
+                <label for="password1">Contraseña:</label>
+                <input class="input" type="password" id="password1" name="password1" placeholder="Contraseña" required>
                 <p class="has-text-white is-size-7">Su contraseña no puede ser similar a otros componentes de su
                     información
                     personal.<br>
@@ -44,9 +44,9 @@
             </div>
 
             <div class="column">
-                <label for="confirm-password">Confirmación de contraseña:</label>
-                <input class="input" type="password" id="confirm-password" name="confirm-password"
-                    placeholder="Confirme Contraseña" required>
+                <label for="password2">Confirmación de contraseña:</label>
+                <input class="input" type="password" id="password2" name="password2" placeholder="Confirme Contraseña"
+                    required>
                 <p class="has-text-white is-size-7">Introduzca la misma contraseña nuevamente, para poder verificar la
                     misma.</p>
             </div>
@@ -59,32 +59,26 @@
     </div>
     <script>
         document.getElementById('registration-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
+            const password = document.getElementById('password1').value;
+            const confirmPassword = document.getElementById('password2').value;
 
             if (password.length < 8) {
                 alert('La contraseña debe tener al menos 8 caracteres.');
+                e.preventDefault();
                 return;
             }
 
             if (/^\d+$/.test(password)) {
                 alert('La contraseña no puede estar formada exclusivamente por números.');
+                e.preventDefault();
                 return;
             }
-
 
             if (password !== confirmPassword) {
                 alert('Las contraseñas no coinciden.');
+                e.preventDefault();
                 return;
             }
-
-            alert('Cuenta creada con éxito!');
-            this.submit();
         });
     </script>
 

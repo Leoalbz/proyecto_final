@@ -35,9 +35,7 @@ class Registro(View):
             user = form.save()
             login(request, user)
             messages.success(request, 'Registro exitoso. ¡Bienvenido!')
-            return redirect('index') 
+            return redirect('index')
         else:
             messages.error(request, 'Error en el registro. Por favor corrige los errores.')
-            return render(request, 'users/registrarse.html', {'form': form})
-
-
+            return render(request, 'users/registrarse.html', {'form': form}) 
