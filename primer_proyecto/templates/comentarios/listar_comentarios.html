@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Gestión de Comentarios</title>
+{% endblock %}
+
+{% block contenido %}
+<section class="column">
+<h1 class="title">Comentarios</h1>
+
+{% if comentarios %}
+<table class="table table-striped" style="color: #FFFFFF;">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Comentario</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comentario in comentarios %}
+        <tr>
+            <td>{{ comentario.usuario.username }}</td>
+            <td>{{ comentario.contenido }}</td>
+            <td>{{ comentario.fecha_publicacion }}</td>
+            <td class="column" style="color: #FFFFFF;">
+                {% if request.user == comentario.usuario or request.user.is_staff %}
+                <!-- Botón para editar -->
+                <a href="{% url 'post:editar_comentario' comentario.pk %}" class="button is-link is-small mb-2 mt-2">Editar</a>
+
+                <!-- Botón para eliminar -->
+                <form action="{% url 'post:eliminar_comentario' comentario.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="color: #FFFFFF;" class="button is-danger is-small mb-2 mt-2">Eliminar</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay comentarios disponibles.</p>
+{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Crear Articulo</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+<section class="section" style="width: 50%; margin: 0 auto;">
+
+  <h1 class="title is-1 text-center has-text-white">Crear Articulo</h1>
+
+  <form method="post" class="has-text-white" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="titulo">Título:</label>
+      <input type="text" name="titulo" id="titulo" class="input has-text-white">
+    </div>
+  
+    <div class="form-group">
+      <label for="contenido">Contenido:</label>
+      <textarea name="contenido" id="contenido" class="textarea has-text-white"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="imagen">Imagen:</label>
+      <input type="file" name="imagen" id="imagen" class="form-control has-background-dark has-text-white">
+    </div>
+  
+    <div class="form-group">
+      <label for="lenguaje">Lenguaje:</label>
+      <input type="text" name="lenguaje" id="lenguaje" class="input has-text-white">
+    </div>
+  
+    <button type="submit" class="button is-primary has-text-white mt-2 mb-2">Guardar</button>
+  </form>
+</section>
+{% endblock %}

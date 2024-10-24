@@ -29,7 +29,7 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r@b6cpnpd*pw6&t$g3q#y=(=(fq#3(_uft(zla8w4pibmbrhl6'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,8 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #apps creadas
-    'apps.post'
+    #apps personalizadas
+    'apps.post',
+    'apps.blog_auth',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'primer_proyecto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / "templates" ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,7 +96,8 @@ DATABASES = {
         "NAME": NAME_DB,
         "USER": USER_DB,
         "PASSWORD": PASSWORD_DB,
-        "PORT": '3306'
+        "HOST": "localhost",
+        "PORT": "3306"
     }
 }
 
@@ -134,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = BASE_DIR / "static" ,
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -142,4 +144,4 @@ STATICFILES_DIRS = BASE_DIR / "static" ,
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'media')
+MEDIA_ROOT = BASE_DIR / 'media'

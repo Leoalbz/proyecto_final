@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>{{ articulo.titulo }}</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+<Section class="column block has-background-dark">
+    <div class="column is-max-desktop">
+        <h1 class="title" style="font-size: 4rem; color: #FFFFFF;">{{ articulo.titulo }}</h1>
+        <img class="card-image image is-square position-relative top-0 start-50 translate-middle-x"
+            src="{{ articulo.imagen.url }}" alt="Imagen de {{ articulo.titulo }}">
+        <p class="content" style="color: #FFFFFF;">{{ articulo.contenido }}</p>
+        <p class="content"><strong class="title is-4">Autor:</strong>{{ articulo.autor.username }}</p>
+    </div>
+
+    <section class="column block mt-4">
+        <h2 class="title">Comentarios:</h2>
+        <div id="comentarios">
+            {% for comentario in comentarios %}
+            <div class="comentario mt-4">
+                <strong class="title is-4">{{ comentario.usuario.username }}</strong><em>{{comentario.fecha_publicacion}}</em>
+                <p class="mb-4" style="color: #FFFFFF;">{{ comentario.contenido }}</p>
+
+                {% if request.user == comentario.usuario or request.user.is_staff %}
+                <a href="{% url 'post:editar_comentario' comentario.pk %}"
+                    class="button is-small is-primary is-outlined">Editar</a>
+                <a href="{% url 'post:eliminar_comentario' comentario.pk %}"
+                    class="button is-small is-danger is-outlined">Eliminar</a>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <div class="column mb-4">
+        {% if user.is_authenticated %}
+        <form class="column is-small mb-4" id="comentario-form" method="post" action="{% url 'post:leer_articulo' articulo.pk %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button is-primary is-small has-text-white mb-4 mt-4">Enviar</button>
+        </form>
+        {% else %}
+        <p class="has-text-white">Debes <a class="title is-6 has-text-link" href="{% url 'users:iniciar_sesion' %}">iniciar sesión</a> para comentar.</p>
+        {% endif %}
+    </div>
+    <script>
+        document.getElementById('comentario-form').onsubmit = function (event) {
+            event.preventDefault();  // Evitar el envío normal del formulario
+            var formData = new FormData(this);  // Crear un objeto FormData con el formulario
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Actualizar la lista de comentarios en la página
+                        var comentariosDiv = document.getElementById('comentarios');
+                        data.comentarios.forEach(function (comentario) {
+                            var comentarioDiv = document.createElement('div');
+                            comentarioDiv.className = 'comentario';
+                            comentarioDiv.innerHTML = '<strong>' + comentario.usuario + '</strong> <em>' + comentario.fecha_publicacion + '</em>' +
+                                '<p>' + comentario.contenido + '</p>';
+                            comentariosDiv.appendChild(comentarioDiv);
+                        });
+                        // Limpiar el formulario
+                        document.getElementById('comentario-form').reset();
+                    } else {
+                        // Manejar errores del formulario
+                        console.log(data.errors);
+                    }
+                });
+        };
+    </script>
+</Section>
+{% endblock %}

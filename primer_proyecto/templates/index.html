@@ -1,20 +1,70 @@
 {% extends 'base.html' %}
+
 {% load static %}
+
 {% block title %}
 <title>Inicio</title>
 {% endblock %}
+
 {% block navegacion %}
 {% include 'nav_bar.html' %}
 {% endblock %}
 
 {% block contenido %}
-<div class="card text-bg-dark" width="100%" height="1200px">
-    <img class="card-img" src="{% static 'img/banner.png' %}" alt="Banner" width="100%" height="auto">
-    <div class="card-img-overlay">
-        
-    </div>
-</div>
-<section>
-  
-</section>
+    <section class="hero text-white py-5"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({% static 'img/banner.png' %}); background-size: cover; background-position: center;">
+        <div class="container text-center">
+            <h1 class="display-4 title is-1">Bienvenidos a Code Crafters</h1>
+            <p class="lead subtitle">Aquí encontrarás los mejores artículos sobre programación y tecnología.</p>
+            <a href="#articulos" class="button is-primary has-text-white">Explorar más</a>
+        </div>
+    </section>
+    <section class="section is-medium is-flex is-flex-direction-column is-justify-content-center is-align-items-center" id="articulos">
+        {% if articulos %}
+        <ul class="column is-three-fifths">
+            {% for articulo in articulos %}
+            <li class="mgb-large">
+                <div class="card mb-4 card-hover">
+                    <div class="row g-0">
+                        {% if articulo.imagen %}
+                        <a href="{% url 'post:leer_articulo' articulo.pk %}"
+                            class="col-lg-8 col-md-12 col-12 img-left-rounded" style="background-image: url({{ articulo.imagen.url }}); background-size: contain; background-position: center; background-repeat: no-repeat;">
+                            <img src="{{ articulo.imagen.url }}" class="img-fluid d-sm-none invisible"
+                                alt="{{ articulo.titulo }}">
+                        </a>
+                        {% endif %}
+
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <a href="{% url 'post:leer_articulo' articulo.pk %}"
+                                    class="badge bg-warning mb-3">Articulo</a>
+                                <h1 class="title is-6 mb-4"> <a href="{% url 'post:leer_articulo' articulo.pk %}"
+                                        class="text-inherit">
+                                        {{ articulo.titulo }}
+                                    </a>
+                                </h1>
+                                <p class="content is-small">{{ articulo.contenido|slice:200 }}</p>
+                                <!-- Media Content -->
+                                <div class="row align-items-center g-0 mt-7">
+                                    <div class="col-auto">
+                                        <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}"
+                                            class="image is-48x48 rounded-circle avatar-sm me-2">
+                                    </div>
+                                    <div class="col lh-1 ">
+                                        <h5 class="mb-1">{{ articulo.autor.username }}</h5>
+                                        <p class="fs-6 mb-0">{{ articulo.fecha_publicacion|date:"d M Y" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No hay artículos disponibles.</p>
+        {% endif %}
+    </section>
 {% endblock %}

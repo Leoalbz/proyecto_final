@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Editar Artículo</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+<section class="section is-medium is-flex is-flex-direction-column is-justify-content-center is-align-items-center ">
+    <h1 class="title is-1 has-text-white text-center">Editar Articulo</h1>
+    <div class="card column is-flex is-justify-content-center is-align-items-center">
+    <h2 class="title has-text-white text-center">{{ articulo.titulo }}</h2>
+    <form class="has-text-white is-flex is-flex-direction-column is-align-content-center is-justify-content-center column is-3 is-flex-wrap-wrap" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button is-primary has-text-white">Actualizar</button>
+    </form>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Eliminar Articulo</title>
+{% endblock %}
+
+{% block navegacion %}
+{% include 'nav_bar.html' %}
+{% endblock %}
+
+{% block contenido %}
+<section class="section column" style="display: flex; flex-direction: column; align-items: center;">
+    <h1 class="title has-text-white text-center">¿Estás seguro que deseas eliminar este artículo?</h1>
+    <div class="card column mb-4" style="display: flex; flex-direction: column; align-items: center; width: 20%;">
+        <h2 class="has-text-white text-center title is-5">{{ articulo.titulo }}</h2>
+        <img class="image is-128x128" src="{{ articulo.imagen.url }}" alt="Imagen de {{ articulo.titulo }}">
+    </div>
+    <div class="mt-4" style="display: flex; flex-direction: row; gap: 1rem; justify-content: center;">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="button is-danger has-text-white">Eliminar</button>
+        </form>
+        <button class="button is-primary"><a href="{% url 'post:leer_articulo' articulo.pk %}"
+                class="has-text-white">Cancelar</a></button>
+    </div>
+</section>
+{% endblock %}
