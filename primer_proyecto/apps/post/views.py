@@ -6,6 +6,7 @@ from .forms import ComentarioForm
 from django.http import HttpResponseForbidden, JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.paginator import Paginator
 
 
 # Listar artículos
@@ -13,6 +14,18 @@ class ListaArticulos(ListView):
     model = Articulo
     template_name = 'genericos/lista_articulos.html'
     context_object_name = 'articulos'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordenar_por = self.request.GET.get('ordenar_por', 'fecha')
+        orden = self.request.GET.get('orden', 'asc')
+        
+        if ordenar_por == 'fecha':
+            queryset = queryset.order_by('fecha_publicacion' if orden == 'asc' else '-fecha_publicacion')
+        elif ordenar_por == 'titulo':
+            queryset = queryset.order_by('titulo' if orden == 'asc' else '-titulo')
+        
+        return queryset
 
 # Detalles de un artículo
 class LeerArticulo(DetailView):
@@ -145,4 +158,3 @@ class RequestDeContacto(CreateView):
     template_name = 'contacto/request_contacto.html'
     fields = ['nombre', 'apellido', 'email', 'mensaje']
     success_url = reverse_lazy('index')
-

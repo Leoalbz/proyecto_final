@@ -7,7 +7,6 @@ __pycache__/
 *.log
 *.sqlite3
 db.sqlite3
-/media/
 .env
 
 # Otros

@@ -13,8 +13,22 @@
 {% block contenido %}
 <section class="column">
 <h1 class="title" style="font-family: sans-serif; font-size: 2rem; font-weight: 900; text-align: center; color: #FFFFFF; font-size: 3rem;">Lista de Artículos</h1>
-
-
+<div class="is-flex is-flex-direction-column is-align-items-center">
+    <form class="has-text-white is-flex is-flex-direction-column is-justify-content-center" method="get">
+        <label for="ordenar_por">Ordenar por:</label>
+        <select name="ordenar_por" id="ordenar_por">
+            <option value="fecha">Fecha de Publicación</option>
+            <option value="titulo">Nombre</option>
+        </select>
+        
+        <label for="orden">Orden:</label>
+        <select name="orden" id="orden">
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+        </select>
+        <button type="submit" class="button is-warning is-small has-text-white mb-2 mt-2">Ordenar</button>
+    </form> 
+</div>
 <ul class="column">
     {% for articulo in articulos %}
     <li style="list-style: none; display: flex; flex-direction: column; flex-wrap: wrap; margin: 1rem; justify-content: center; align-items: center; text-align: center;">
@@ -23,9 +37,9 @@
             <img class="card-img-top" src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}">
             {% endif %}
             <div class="column card-body">
-              <h5 class="card-title title is-5" style="color: #FFFFFF;">{{ articulo.titulo }}</h5>
-              <p class="column card-text" style="color: #FFFFFF;">{{ articulo.contenido|slice:"50" }}</p>
-              <p class="subtitle" style="color: #FFFFFF;">{{ articulo.lenguaje }}</p> 
+              <h5 class="card-title title is-5" style="color: #070606;">{{ articulo.titulo }}</h5>
+              <p class="column card-text" style="color: #080606;">{{ articulo.contenido|slice:"50" }}</p>
+              <p class="subtitle" style="color: #070505;">{{ articulo.lenguaje }}</p> 
               <a href="{% url 'post:leer_articulo' articulo.pk %}" class="button is-primary is-small has-text-white mb-4 mt-4">Leer mas</a>
             </div>
           </div>
